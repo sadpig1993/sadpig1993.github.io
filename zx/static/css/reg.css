@@ -1,0 +1,129 @@
+*{
+	-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+html, body {
+margin: 0;
+padding: 0;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.header{
+	background-color: #4384e6;
+	background-repeat: repeat-x;
+	border: 0!important;
+	z-index: 100;
+	box-shadow: 0px 2px 4px gray;
+}
+.container{
+	width:960px;
+	min-width: 350px;
+	margin:0 auto;
+}
+.tip{
+	background:#466D83;
+	color: #fff;
+	border-radius: 3px;
+	padding: 10px 20px;
+	line-height: 18px;
+	width: 100%;
+	margin-top: 20px;
+	font-size: 13px;
+}
+li{
+		display:block;
+		height: 60px;
+		margin-bottom:5px; 
+	}
+	.Validform_checktip{
+		position: absolute;
+		top: 33px;
+		left: 53px;
+	}
+/*响应式部分*/
+@media (min-width: 1200px){
+	.container {
+    width: 1170px;
+	}
+	label{
+		width: 135px;
+	}
+	.content form{
+		margin-left: 5%;
+	}
+	.content {
+		width:1170px;
+		margin:20px auto; 
+	}
+	.Validform_checktip{
+		left: 95px;
+	}
+}
+@media (max-width: 950px){
+	.content form{
+		width: 100%;
+	}
+}
+@media (max-width: 1200px) and ( min-width: 640px){
+	.container {
+	    max-width: 960px;
+	    width: 100%;
+	}
+	.content {
+		width:100%-60px;
+		margin:20px 30px;
+	}
+	.content form{
+		margin-left: 5%;
+	}
+	label{
+		width: 120px;
+	}
+	.tip{
+		line-height: 18px;
+		font-size: 13px;
+	}
+	.Validform_checktip{
+		left: 95px;
+	}
+}
+@media (max-width: 640px){
+	.container {
+	    width: 100%;
+	}
+	.tip{
+		font-size: 12px;
+		padding: 10px;
+	}
+	.content {
+		margin:5px; 
+	}
+	li{
+		display:block;
+		height: 60px;
+		margin-bottom:5px; 
+	}
+	.Validform_checktip{
+		left: 53px;
+	}
+	select{
+		max-width: 150px;
+	}
+	label{
+		width: 100px;
+	}
+	h1{
+		font-size: 16px;
+		text-align: center;
+	}
+	.content form{
+		margin-top: 20px!important;
+	}
+	#bumen-check{
+		margin-left: 17px;
+	}
+	#submit{
+		left: 115px;
+	}
+}
+
