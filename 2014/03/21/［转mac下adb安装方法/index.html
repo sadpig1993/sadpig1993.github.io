@@ -4,15 +4,19 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>CentOS挂载NTFS硬盘 | Sadpig | 悲伤的只是一直猪</title>
+    <title>［转mac下adb安装方法 | Sadpig | 悲伤的只是一直猪</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Sadpig">
     
-    <meta name="description" content="CentOS本身是不支持NTFS的格式的，为了让CentOS能够支持Windows的NTFS。利用ntfs－3g使其支持NTFS的挂载。
-步骤如下：
-一、安装ntfs－3g
-1、从官网http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs">
+    <meta name="description" content="和Linux下面的使用方法差不多，如果你不想安装庞大的android SDK的话
+在这里下载adb工具包
+http://dl.dbank.com/c001bzfxoe
+然后解压到任意位置
+接下来在当前用户根目录下新建 .profile 文件
+可以在终端中敲入以下命令
+cd ~
+touch .prof">
     
     
     
@@ -69,15 +73,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/04/25/CentOS挂载NTFS硬盘/" title="CentOS挂载NTFS硬盘" itemprop="url">CentOS挂载NTFS硬盘</a>
+      <a href="/2014/03/21/［转mac下adb安装方法/" title="［转mac下adb安装方法" itemprop="url">［转mac下adb安装方法</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://sadpig.github.io" title="Sadpig">Sadpig</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-04-25T00:25:44.000Z" itemprop="datePublished">Apr 25 2014</time>
-    Updated:<time datetime="2014-09-09T05:16:25.000Z" itemprop="dateModified">Sep 9 2014</time>
+    <time datetime="2014-03-21T12:24:57.000Z" itemprop="datePublished">Mar 21 2014</time>
+    Updated:<time datetime="2015-02-12T07:45:40.000Z" itemprop="dateModified">Feb 12 2015</time>
     
   </p>
 </header>
@@ -89,22 +93,21 @@
 		
 		</div>
 		
-		<p>CentOS本身是不支持NTFS的格式的，为了让CentOS能够支持Windows的NTFS。利用ntfs－3g使其支持NTFS的挂载。</p>
-<p>步骤如下：</p>
-<p>一、安装ntfs－3g</p>
-<p>1、从官网<a href="http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs－3g" target="_blank" rel="external">http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs－3g</a></p>
-<p>2、解压tar.gz包。在目录中运行命令窗。</p>
-<div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>./configure</li><br>    <li>make</li><br>    <li>make install</li><br></ol><br></div><br>或者直接都在命令窗中操作<br><br><br><br><br><div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>wget <a href="http://tuxera.com/opensource/ntfs-3g_ntfsprogs-2011.4.12.tgz" target="_blank" rel="external">http://tuxera.com/opensource/ntfs-3g_ntfsprogs-2011.4.12.tgz</a></li><br>    <li>tar zxvf ntfs-3g-2010.8.8.tgz</li><br>    <li>cd ntfs-3g-2010.8.8</li><br>    <li>./configure</li><br>    <li>make</li><br>    <li>make install</li><br></ol><br></div><br><strong>*</strong>在configure的时候可能会跳出 no acceptable C compiler in $PATH<strong><strong><br><br><br><br>这是由于没有安装gcc这个c编译器，安装方法 # yum -y install gcc<br><br>重新上面configure后的步骤<br><br>*</strong></strong>解决<em>*</em><br><br>一、挂载NTFS硬盘<br><br>这里以windows中的C盘( /dev/sda1)为例。<br><br>1、创建挂载点，建议放在/mnt/windows下<br><div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>mkdir /mnt/windows</li><br>    <li>mkdir /mnt/windows/c</li><br></ol><br></div>
-
-
-<p>2、挂载C盘</p>
-<div><br><div><b> </b></div><br><ol start="1"><br>    <li>mount -t ntfs-3g /dev/sda1 /mnt/windows/winC</li><br>    <li>mount -t ntfs-3g /dev/sda5 /mnt/windows/winD</li><br>    <li>mount -t ntfs-3g /dev/sda6 /mnt/windows/winE</li><br>    <li>mount -t ntfs-3g /dev/sda7 /mnt/windows/winF</li><br>    <li>mount -t ntfs-3g /dev/sdb1 /mnt/windows/MobileHard</li><br></ol><br></div>
-
-
-<p>至此，就可以查看并编辑/mnt/window/中Windows中NTFS盘的内容</p>
-<p>参考资料：</p>
-<p>1、<a href="http://www.ha97.com/2832.html" target="_blank" rel="external">http://www.ha97.com/2832.html</a></p>
-<p>2、<a href="http://blog.sina.com.cn/s/blog_4d834cf30100bxv9.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4d834cf30100bxv9.html</a></p>
+		<p>和Linux下面的使用方法差不多，如果你不想安装庞大的android SDK的话</p>
+<p>在这里下载adb工具包</p>
+<p><a href="http://dl.dbank.com/c001bzfxoe" target="_blank" rel="external">http://dl.dbank.com/c001bzfxoe</a></p>
+<p>然后解压到任意位置</p>
+<p>接下来在当前用户根目录下新建 .profile 文件</p>
+<p>可以在终端中敲入以下命令</p>
+<p>cd ~</p>
+<p>touch .profile</p>
+<p>新建文件，然后编辑该文件</p>
+<p>vi .profile</p>
+<p>粘贴如下：</p>
+<p>PATH=${PATH}:/Users/rabbit/Documents/platform-tools</p>
+<p>其中红色部分就是刚才解压后的adb工具路径，替换成你的，保存之后，重启终端</p>
+<p>如果在终端中敲入 adb 回车 之后有形似如下的信息，就表示安装成功了<br><img src="http://farm8.staticflickr.com/7053/6847064685_cdcec0bd68.jpg" alt=""></p>
+<p>这时候你就可以连上你的android手机操练操练了！比如说 adb reboot 什么的 ^_^</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -114,7 +117,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://sadpig.github.io/2014/04/25/CentOS挂载NTFS硬盘/" data-title="CentOS挂载NTFS硬盘 | Sadpig | 悲伤的只是一直猪" data-tsina="null" class="share clearfix">
+  <div data-url="http://sadpig.github.io/2014/03/21/［转mac下adb安装方法/" data-title="［转mac下adb安装方法 | Sadpig | 悲伤的只是一直猪" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -124,18 +127,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/07/14/阿里实习第一周过去了/" title="阿里实习第一周过去了">
+ <a href="/2014/03/24/nginx 代理 proxy_pass设置/" title="nginx代理proxy_pass设置">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  阿里实习第一周过去了</span>
+  nginx代理proxy_pass设置</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2014/04/16/阿里巴巴前端实习面试一日游/"  title="阿里巴巴前端实习面试一日游">
+<a href="/2014/03/20/这几天关于移动web开发的总结/"  title="这几天关于移动web开发的总结">
  <strong>NEXT:</strong><br/> 
- <span>阿里巴巴前端实习面试一日游
+ <span>这几天关于移动web开发的总结
 </span>
 </a>
 </div>

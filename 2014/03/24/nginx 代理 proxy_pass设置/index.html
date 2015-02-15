@@ -4,15 +4,15 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>CentOS挂载NTFS硬盘 | Sadpig | 悲伤的只是一直猪</title>
+    <title>nginx代理proxy_pass设置 | Sadpig | 悲伤的只是一直猪</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Sadpig">
     
-    <meta name="description" content="CentOS本身是不支持NTFS的格式的，为了让CentOS能够支持Windows的NTFS。利用ntfs－3g使其支持NTFS的挂载。
-步骤如下：
-一、安装ntfs－3g
-1、从官网http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs">
+    <meta name="description" content="今天在服务器上装了node和express
+用forever守护进程自启动
+express用的8080端口，然后用nginx反向代理把域名代理到了127.0.0.1:8080了。
+server{    listen 80;    server_name node.miyijia.com;    lo">
     
     
     
@@ -69,15 +69,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/04/25/CentOS挂载NTFS硬盘/" title="CentOS挂载NTFS硬盘" itemprop="url">CentOS挂载NTFS硬盘</a>
+      <a href="/2014/03/24/nginx 代理 proxy_pass设置/" title="nginx代理proxy_pass设置" itemprop="url">nginx代理proxy_pass设置</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://sadpig.github.io" title="Sadpig">Sadpig</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-04-25T00:25:44.000Z" itemprop="datePublished">Apr 25 2014</time>
-    Updated:<time datetime="2014-09-09T05:16:25.000Z" itemprop="dateModified">Sep 9 2014</time>
+    <time datetime="2014-03-24T10:33:55.000Z" itemprop="datePublished">Mar 24 2014</time>
+    Updated:<time datetime="2015-02-12T07:40:25.000Z" itemprop="dateModified">Feb 12 2015</time>
     
   </p>
 </header>
@@ -89,22 +89,10 @@
 		
 		</div>
 		
-		<p>CentOS本身是不支持NTFS的格式的，为了让CentOS能够支持Windows的NTFS。利用ntfs－3g使其支持NTFS的挂载。</p>
-<p>步骤如下：</p>
-<p>一、安装ntfs－3g</p>
-<p>1、从官网<a href="http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs－3g" target="_blank" rel="external">http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs－3g</a></p>
-<p>2、解压tar.gz包。在目录中运行命令窗。</p>
-<div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>./configure</li><br>    <li>make</li><br>    <li>make install</li><br></ol><br></div><br>或者直接都在命令窗中操作<br><br><br><br><br><div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>wget <a href="http://tuxera.com/opensource/ntfs-3g_ntfsprogs-2011.4.12.tgz" target="_blank" rel="external">http://tuxera.com/opensource/ntfs-3g_ntfsprogs-2011.4.12.tgz</a></li><br>    <li>tar zxvf ntfs-3g-2010.8.8.tgz</li><br>    <li>cd ntfs-3g-2010.8.8</li><br>    <li>./configure</li><br>    <li>make</li><br>    <li>make install</li><br></ol><br></div><br><strong>*</strong>在configure的时候可能会跳出 no acceptable C compiler in $PATH<strong><strong><br><br><br><br>这是由于没有安装gcc这个c编译器，安装方法 # yum -y install gcc<br><br>重新上面configure后的步骤<br><br>*</strong></strong>解决<em>*</em><br><br>一、挂载NTFS硬盘<br><br>这里以windows中的C盘( /dev/sda1)为例。<br><br>1、创建挂载点，建议放在/mnt/windows下<br><div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>mkdir /mnt/windows</li><br>    <li>mkdir /mnt/windows/c</li><br></ol><br></div>
-
-
-<p>2、挂载C盘</p>
-<div><br><div><b> </b></div><br><ol start="1"><br>    <li>mount -t ntfs-3g /dev/sda1 /mnt/windows/winC</li><br>    <li>mount -t ntfs-3g /dev/sda5 /mnt/windows/winD</li><br>    <li>mount -t ntfs-3g /dev/sda6 /mnt/windows/winE</li><br>    <li>mount -t ntfs-3g /dev/sda7 /mnt/windows/winF</li><br>    <li>mount -t ntfs-3g /dev/sdb1 /mnt/windows/MobileHard</li><br></ol><br></div>
-
-
-<p>至此，就可以查看并编辑/mnt/window/中Windows中NTFS盘的内容</p>
-<p>参考资料：</p>
-<p>1、<a href="http://www.ha97.com/2832.html" target="_blank" rel="external">http://www.ha97.com/2832.html</a></p>
-<p>2、<a href="http://blog.sina.com.cn/s/blog_4d834cf30100bxv9.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4d834cf30100bxv9.html</a></p>
+		<p>今天在服务器上装了node和express</p>
+<p>用forever守护进程自启动</p>
+<p>express用的8080端口，然后用nginx反向代理把域名代理到了127.0.0.1:8080了。</p>
+<p>server<br>{<br>    listen 80;<br>    server_name node.miyijia.com;<br>    location / {<br>        proxy_pass <a href="http://127.0.0.1:8080" target="_blank" rel="external">http://127.0.0.1:8080</a>;<br>        proxy_redirect off;<br>        proxy_set_header X-Real-IP $remote_addr;<br>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>    }<br>}</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -114,7 +102,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://sadpig.github.io/2014/04/25/CentOS挂载NTFS硬盘/" data-title="CentOS挂载NTFS硬盘 | Sadpig | 悲伤的只是一直猪" data-tsina="null" class="share clearfix">
+  <div data-url="http://sadpig.github.io/2014/03/24/nginx 代理 proxy_pass设置/" data-title="nginx代理proxy_pass设置 | Sadpig | 悲伤的只是一直猪" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -124,18 +112,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/07/14/阿里实习第一周过去了/" title="阿里实习第一周过去了">
+ <a href="/2014/04/14/帝都乱逛之互联网创业者大会/" title="帝都乱逛之互联网创业者大会">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  阿里实习第一周过去了</span>
+  帝都乱逛之互联网创业者大会</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2014/04/16/阿里巴巴前端实习面试一日游/"  title="阿里巴巴前端实习面试一日游">
+<a href="/2014/03/21/［转mac下adb安装方法/"  title="［转mac下adb安装方法">
  <strong>NEXT:</strong><br/> 
- <span>阿里巴巴前端实习面试一日游
+ <span>［转mac下adb安装方法
 </span>
 </a>
 </div>
