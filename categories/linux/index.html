@@ -3,18 +3,13 @@
 <head>
   <meta charset="utf-8">
   
-  <title>CentOS挂载NTFS硬盘 | &lt;Sadpig&gt;</title>
+  <title>linux | &lt;Sadpig&gt;</title>
   <meta name="author" content="Sadpig">
-  
-  <meta name="description" content="CentOS本身是不支持NTFS的格式的，为了让CentOS能够支持Windows的NTFS。利用ntfs－3g使其支持NTFS的挂载。
-步骤如下：
-一、安装ntfs－3g
-1、从官网http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="CentOS挂载NTFS硬盘"/>
+  
   <meta property="og:site_name" content="&lt;Sadpig&gt;"/>
 
   
@@ -58,7 +53,12 @@
 </nav>
 <div class="clearfix"></div></header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div id="main-col" class="alignleft"><div id="wrapper">
+<h2 class="archive-title category">linux</h2>
+
+
+  
+    <article class="post">
   
     <div class="gallery">
   <div class="photoset">
@@ -79,7 +79,7 @@
       
       
   
-    <h1 class="title">CentOS挂载NTFS硬盘</h1>
+    <h1 class="title"><a href="/2014/04/25/CentOS挂载NTFS硬盘/">CentOS挂载NTFS硬盘</a></h1>
   
 
     </header>
@@ -106,67 +106,73 @@
     </div>
     <footer>
       
-
-        
-          <div class="alignleft post-nav">
-            <em>上一篇: </em><a href="/2014/07/14/阿里实习第一周过去了/">阿里实习第一周过去了</a>
-          </div>
         
         
-          <div class="alignright post-nav">
-            <em>下一篇: </em><a href="/2014/04/16/阿里巴巴前端实习面试一日游/">阿里巴巴前端实习面试一日游</a>
-          </div>
-          <div class="clearfix"></div>
-        
-
-        
-          <div class="copyright">
-            
-              <span class="claim">版权声明：自由转载-非商用-无演绎-保持署名 @ Creative Commons BY-NC-ND 3.0</span>
-            
-            
-              <span class="from-link">
-                <em>本文链接地址:</em>
-                <a href="/2014/04/25/CentOS挂载NTFS硬盘/">
-                  http://sadpig.github.io/2014/04/25/CentOS挂载NTFS硬盘/
-                </a>
-              </span>
-            
-          </div>
-        
-        
-  
-  <div class="categories">
-    <a href="/categories/linux/">linux</a>
-  </div>
-
-        
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_sinaweibo_like"></a>
-    
-    
-      <a class="addthis_button_linkedin"></a>
-    
-    
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
       
       <div class="clearfix"></div>
     </footer>
   </div>
 </article>
 
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
+        <time datetime="2014-03-24T10:33:55.000Z"><a href="/2014/03/24/nginx 代理 proxy_pass设置/">Mar 24 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/24/nginx 代理 proxy_pass设置/">nginx代理proxy_pass设置</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>今天在服务器上装了node和express</p>
+<p>用forever守护进程自启动</p>
+<p>express用的8080端口，然后用nginx反向代理把域名代理到了127.0.0.1:8080了。</p>
+<p>server<br>{<br>    listen 80;<br>    server_name node.miyijia.com;<br>    location / {<br>        proxy_pass <a href="http://127.0.0.1:8080" target="_blank" rel="external">http://127.0.0.1:8080</a>;<br>        proxy_redirect off;<br>        proxy_set_header X-Real-IP $remote_addr;<br>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>    }<br>}</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+
+  <ul class="page-direction" id="page-direction">
+    <li><a class="page-prev icon-chevron-sign-left" href="javascript:;" title="Prev"></a></li>
+    <li><a class="page-next icon-chevron-sign-right" href="javascript:;" title="Next"></a></li>
+</ul>
+
+<nav id="pagination">
+  
+  
+  <div class="clearfix"></div>
+</nav>
 </div></div>
     <aside id="sidebar" class="alignright">
   <div class="search">
