@@ -4,42 +4,16 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>某个精简到极致的模板渲染引擎学习 | Sadpig | 悲伤的只是一直猪</title>
+    <title>这几天关于移动web开发的总结 | Sadpig | 悲伤的只是一直猪</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Sadpig">
     
-    <meta name="description" content="这个是在实习的时候项目里用的最多的一个tpl的渲染函数。代码不多却效率很高。一直在用却没分析过他的原理。
-源码
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-ui.tmpl = function ">
+    <meta name="description" content="这几天一直在纠结要不要改版密议荚移动端，因为移动的流量太多了。
+做移动端web开发难免想去实现一些原生app的效果
+最简单的，下拉刷新，上拉刷新之类的，页面的切换。
+有一个常见的iscroll.js
+这个东西我以前在我的移动web课程表的应用里用到过。当时对它的概念不是很了解。这次想了解深入，希望能">
     
     
     
@@ -96,15 +70,15 @@ ui.tmpl = function ">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2014/09/03/某个精简到极致的模板渲染引擎学习/" title="某个精简到极致的模板渲染引擎学习" itemprop="url">某个精简到极致的模板渲染引擎学习</a>
+      <a href="/2014/03/20/这几天关于移动web开发的总结/" title="这几天关于移动web开发的总结" itemprop="url">这几天关于移动web开发的总结</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://sadpig.github.io" title="Sadpig">Sadpig</a>
     </p>
   <p class="article-time">
-    <time datetime="2014-09-02T16:51:00.000Z" itemprop="datePublished">Sep 3 2014</time>
-    Updated:<time datetime="2014-09-02T16:56:20.000Z" itemprop="dateModified">Sep 3 2014</time>
+    <time datetime="2014-03-20T08:06:11.000Z" itemprop="datePublished">Mar 20 2014</time>
+    Updated:<time datetime="2014-09-09T05:14:59.000Z" itemprop="dateModified">Sep 9 2014</time>
     
   </p>
 </header>
@@ -113,70 +87,41 @@ ui.tmpl = function ">
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.</span> <span class="toc-text">源码</span></a></li></ol>
+		
 		</div>
 		
-		<p> 这个是在实习的时候项目里用的最多的一个tpl的渲染函数。代码不多却效率很高。一直在用却没分析过他的原理。</p>
-<h2 id="源码">源码</h2>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-</pre></td><td class="code"><pre>ui.tmpl = <span class="function"><span class="keyword">function</span> <span class="title">tmpl</span><span class="params">(str, data)</span> {</span>
-     <span class="comment">// Figure out if we're getting a template, or if we need to</span>
-     <span class="comment">// load the template - and be sure to cache the result.</span>
-     <span class="keyword">var</span> fn = !<span class="regexp">/\W/</span>.test(str) ?
-         cache[str] = cache[str] ||
-             tmpl(document.getElementById(str).innerHTML) :
-
-         <span class="comment">// Generate a reusable function that will serve as a template</span>
-         <span class="comment">// generator (and which will be cached).</span>
-         <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"obj"</span>,
-             <span class="string">"var p=[],print=function(){p.push.apply(p,arguments);};"</span> +
-
-                 <span class="comment">// Introduce the data as local variables using with(){}</span>
-                 <span class="string">"with(obj){p.push('"</span> +
-
-                 <span class="comment">// Convert the template into pure JavaScript</span>
-                 str
-                     .replace(<span class="regexp">/[\r\t\n]/g</span>, <span class="string">" "</span>)
-                     .split(<span class="string">"&lt;%"</span>).join(<span class="string">"\t"</span>)
-                     .replace(<span class="regexp">/((^|%&gt;)[^\t]*)'/g</span>, <span class="string">"$1\r"</span>)
-                     .replace(<span class="regexp">/\t=(.*?)%&gt;/g</span>, <span class="string">"',$1,'"</span>)
-                     .split(<span class="string">"\t"</span>).join(<span class="string">"');"</span>)
-                     .split(<span class="string">"%&gt;"</span>).join(<span class="string">"p.push('"</span>)
-                     .split(<span class="string">"\r"</span>).join(<span class="string">"\\'"</span>) + <span class="string">"');}return p.join('');"</span>);
-
-     <span class="comment">// Provide some basic currying to the user</span>
-     <span class="keyword">return</span> data ? fn(data) : fn;
- };
-</pre></td></tr></table></figure>
-
-<p>还是有英文注释的，可以借助注释很好的分析下原理</p>
+		<p>这几天一直在纠结要不要改版密议荚移动端，因为移动的流量太多了。</p>
+<p>做移动端web开发难免想去实现一些原生app的效果</p>
+<p>最简单的，下拉刷新，上拉刷新之类的，页面的切换。</p>
+<p>有一个常见的iscroll.js</p>
+<p>这个东西我以前在我的移动web课程表的应用里用到过。当时对它的概念不是很了解。这次想了解深入，希望能用它开发的更好。结果，lz就被坑了一个晚上。</p>
+<p>最后没加下拉刷新。这个功能后面补。</p>
+<p>主要是一些简单的模拟</p>
+<p>这是一个单页应用</p>
+<p><img class="alignnone" alt="" src="http://images.cnblogs.com/cnblogs_com/rubylouvre/495346/o_structure-1.png" width="193" height="271"></p>
+<p>图片来自<a href="http://www.html-js.com/blog/2328" target="_blank" rel="external">http://www.html-js.com/blog/2328</a></p>
+<p>我根据这个博客吸取了很多东西</p>
+<p>我的应用没有header和footer，只是2个view在不停的切换。。。其实完全可以直接就&lt;a&gt;超链接解决，我也不懂我干嘛要这么干。。。</p>
+<p><a href="http://www.miyijia.com" target="_blank" rel="external">http://www.miyijia.com</a></p>
+<p>大家用手机去看下吧。</p>
+<p><a href="http://www.iweile.cn/wp-content/uploads/2014/03/D6XTK2EEHKDD_X1QM1.jpg" target="_blank" rel="external"><img class="alignnone size-medium wp-image-180" alt="D6[X}TK2[EEHKDD_$`$X1QM" src="http://www.iweile.cn/wp-content/uploads/2014/03/D6XTK2EEHKDD_X1QM1-214x300.jpg" width="214" height="300"></a></p>
+<p>adsense无视，赚生活费的。</p>
+<p>很简单的单页应用，写了一整天（下午2点－晚上）</p>
+<p>view很简单。</p>
+<p>第一个要解决的问题：</p>
+<p>以前常用的是tp的模板输出，这次不干了。用的arttmeplate模板引擎，泥马真心好用，一个json和一个html模板就可以了。</p>
+<p>不用再$(‘.xxx’).append(‘&lt;a&gt;&lt;/a&gt;’);了。github地址：<a href="https://github.com/aui/artTemplate" target="_blank" rel="external">https://github.com/aui/artTemplate</a> 推荐使用，性能挺高。</p>
+<p>第二个问题：view之间切换，可以用hide和show，百度新闻移动页貌似是这么做的。但是我想做一个banner轮播式的切换，刚才的文章用css3解决了</p>
+<p>用animate貌似也可以。我开始是用animate的。</p>
+<p><img class="alignnone" alt="" src="http://images.cnblogs.com/cnblogs_com/rubylouvre/495346/o_structure-6.png" width="372" height="293"></p>
+<p><pre class="brush:css">&lt;style type=”text/css”&gt;<br>    .current.out {<br>        -webkit-transition: -webkit-transform 400ms;<br>        -webkit-transform: translate3d(-100%,0,0);<br>    }<br>    .next {<br>        display: block;<br>        -webkit-transform: translate3d(100%,0,0);<br>    }<br>    .next.in{<br>        -webkit-transition: -webkit-transform 400ms;<br>        -webkit-transform: translate3d(0,0,0);<br>    }<br>&lt;/style&gt;</pre><br>一个view作为current 一个就是next。current的view添加一个out伪类就可以out出去了，next加一个in就进来了。很好用。</p>
+<p>完成之后修改当前的view为current。另一个hide起来。</p>
+<p>。</p>
+<p>还想做一个随手指拖动的切换view的功能，下次再说吧。</p>
+<p>接下来是赞的功能的实现，因为图片会不断load进来，dom会不断增多，所以采用事件委托的方式解决点击事件。这里涉及到click和tap的处理。我暂时用的click替代的tap，虽然知道不好，但是先用着吧。</p>
+<p>关于事件委托，在前段乱炖社区看到的不错的文章，转给大家：<a href="http://www.html-js.com/article/1824" target="_blank" rel="external">http://www.html-js.com/article/1824</a></p>
+<p>最近太忙，先写一部分吧。</p>
+<p>后面的完善等过几天再做。猛啃《javascript高级程序设计》中。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -186,7 +131,7 @@ ui.tmpl = function ">
 
 <div class="article-share" id="share">
 
-  <div data-url="http://sadpig.github.io/2014/09/03/某个精简到极致的模板渲染引擎学习/" data-title="某个精简到极致的模板渲染引擎学习 | Sadpig | 悲伤的只是一直猪" data-tsina="null" class="share clearfix">
+  <div data-url="http://sadpig.github.io/2014/03/20/这几天关于移动web开发的总结/" data-title="这几天关于移动web开发的总结 | Sadpig | 悲伤的只是一直猪" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -196,21 +141,13 @@ ui.tmpl = function ">
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2014/09/09/我在仙林这两年/" title="我在仙林这两年">
+ <a href="/2014/04/16/阿里巴巴前端实习面试一日游/" title="阿里巴巴前端实习面试一日游">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  我在仙林这两年</span>
+  阿里巴巴前端实习面试一日游</span>
 </a>
 </div>
 
-
-<div class="next">
-<a href="/2014/08/12/[翻译]html5预读，预测用户行为提前加载资源提高用户体验/"  title="[翻译]html5预读取，预测用户行为提前加载资源提高用户体验">
- <strong>NEXT:</strong><br/> 
- <span>[翻译]html5预读取，预测用户行为提前加载资源提高用户体验
-</span>
-</a>
-</div>
 
 </nav>
 
@@ -220,7 +157,7 @@ ui.tmpl = function ">
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#源码"><span class="toc-number">1.</span> <span class="toc-text">源码</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
