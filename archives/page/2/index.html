@@ -75,6 +75,80 @@
   <div class="post-content">
     <header>
       
+        <time datetime="2014-03-20T08:06:11.000Z"><a href="/2014/03/20/这几天关于移动web开发的总结/">Mar 20 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/20/这几天关于移动web开发的总结/">这几天关于移动web开发的总结</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>这几天一直在纠结要不要改版密议荚移动端，因为移动的流量太多了。</p>
+<p>做移动端web开发难免想去实现一些原生app的效果</p>
+<p>最简单的，下拉刷新，上拉刷新之类的，页面的切换。</p>
+<p>有一个常见的iscroll.js</p>
+<p>这个东西我以前在我的移动web课程表的应用里用到过。当时对它的概念不是很了解。这次想了解深入，希望能用它开发的更好。结果，lz就被坑了一个晚上。</p>
+<p>最后没加下拉刷新。这个功能后面补。</p>
+<p>主要是一些简单的模拟</p>
+<p>这是一个单页应用</p>
+<p><img class="alignnone" alt="" src="http://images.cnblogs.com/cnblogs_com/rubylouvre/495346/o_structure-1.png" width="193" height="271"></p>
+<p>图片来自<a href="http://www.html-js.com/blog/2328" target="_blank" rel="external">http://www.html-js.com/blog/2328</a></p>
+<p>我根据这个博客吸取了很多东西</p>
+<p>我的应用没有header和footer，只是2个view在不停的切换。。。其实完全可以直接就&lt;a&gt;超链接解决，我也不懂我干嘛要这么干。。。</p>
+<p><a href="http://www.miyijia.com" target="_blank" rel="external">http://www.miyijia.com</a></p>
+<p>大家用手机去看下吧。</p>
+<p><a href="http://www.iweile.cn/wp-content/uploads/2014/03/D6XTK2EEHKDD_X1QM1.jpg" target="_blank" rel="external"><img class="alignnone size-medium wp-image-180" alt="D6[X}TK2[EEHKDD_$`$X1QM" src="http://www.iweile.cn/wp-content/uploads/2014/03/D6XTK2EEHKDD_X1QM1-214x300.jpg" width="214" height="300"></a></p>
+<p>adsense无视，赚生活费的。</p>
+<p>很简单的单页应用，写了一整天（下午2点－晚上）</p>
+<p>view很简单。</p>
+<p>第一个要解决的问题：</p>
+<p>以前常用的是tp的模板输出，这次不干了。用的arttmeplate模板引擎，泥马真心好用，一个json和一个html模板就可以了。</p>
+<p>不用再$(‘.xxx’).append(‘&lt;a&gt;&lt;/a&gt;’);了。github地址：<a href="https://github.com/aui/artTemplate" target="_blank" rel="external">https://github.com/aui/artTemplate</a> 推荐使用，性能挺高。</p>
+<p>第二个问题：view之间切换，可以用hide和show，百度新闻移动页貌似是这么做的。但是我想做一个banner轮播式的切换，刚才的文章用css3解决了</p>
+<p>用animate貌似也可以。我开始是用animate的。</p>
+<p><img class="alignnone" alt="" src="http://images.cnblogs.com/cnblogs_com/rubylouvre/495346/o_structure-6.png" width="372" height="293"></p>
+<p><pre class="brush:css">&lt;style type=”text/css”&gt;<br>    .current.out {<br>        -webkit-transition: -webkit-transform 400ms;<br>        -webkit-transform: translate3d(-100%,0,0);<br>    }<br>    .next {<br>        display: block;<br>        -webkit-transform: translate3d(100%,0,0);<br>    }<br>    .next.in{<br>        -webkit-transition: -webkit-transform 400ms;<br>        -webkit-transform: translate3d(0,0,0);<br>    }<br>&lt;/style&gt;</pre><br>一个view作为current 一个就是next。current的view添加一个out伪类就可以out出去了，next加一个in就进来了。很好用。</p>
+<p>完成之后修改当前的view为current。另一个hide起来。</p>
+<p>。</p>
+<p>还想做一个随手指拖动的切换view的功能，下次再说吧。</p>
+<p>接下来是赞的功能的实现，因为图片会不断load进来，dom会不断增多，所以采用事件委托的方式解决点击事件。这里涉及到click和tap的处理。我暂时用的click替代的tap，虽然知道不好，但是先用着吧。</p>
+<p>关于事件委托，在前段乱炖社区看到的不错的文章，转给大家：<a href="http://www.html-js.com/article/1824" target="_blank" rel="external">http://www.html-js.com/article/1824</a></p>
+<p>最近太忙，先写一部分吧。</p>
+<p>后面的完善等过几天再做。猛啃《javascript高级程序设计》中。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
         <time datetime="2014-03-18T13:41:28.000Z"><a href="/2014/03/18/[转]git-flow开发流程/">Mar 18 2014</a></time>
       
       
@@ -168,6 +242,10 @@
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/06/javascript继承简单理解/">javascript继承简单理解</a>
+      </li>
     
       <li>
         <a href="/2014/09/09/我在仙林这两年/">我在仙林这两年</a>

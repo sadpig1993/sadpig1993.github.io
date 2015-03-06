@@ -71,6 +71,315 @@
   <div class="post-content">
     <header>
       
+        <time datetime="2015-03-06T11:37:41.000Z"><a href="/2015/03/06/javascript继承简单理解/">Mar 6 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/03/06/javascript继承简单理解/">javascript继承简单理解</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>最近回看一些面试题，然后翻翻书，把一些很老的东西整理一下。<br>先讲个段子，有个学长去某公司面试，人家问你对js的面向对象编程怎么看。学长很机智的说了一句：es5实现的不好，我觉得es6才是王道。然后面试官点了点头，似乎没法往下问了。</p>
+<p>javascript的面向对象的知识一直只是在书上看，也没真正的去写过，今天就自己去实现一下。</p>
+<p>javascript里遇到的东西大部分都是对象(object)，Array和Object虽然不一样，但是区别不大。我们可以用new后加构造函数可以去实例化一个对象。或者对象字面量，数组[],对象{}。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+</pre></td><td class="code"><pre>	<span class="keyword">var</span> a = <span class="keyword">new</span> <span class="built_in">Array</span>();
+	<span class="keyword">var</span> b = <span class="keyword">new</span> <span class="built_in">Object</span>();
+</pre></td></tr></table></figure><br>这个new在其他语言里面的确是实例化一个对象的意思，但是在javascript好像不一样。<br><br>###new大致流程<br><br>在javascript里面，new的过程大概是这样的<br><br>1.首先创建个Object<br>2.修改这个对象的<strong><strong>proto</strong></strong>，使其指向构造函数的prototype<br>3.将这个对象交给构造函数的this，调用构造函数<br>4.如果构造函数没有return，那么返回这个对象。否则构造函数返回return语句后面的内容<br><br>这个过程我们也可以用代码去实现<br><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre><span class="built_in">Function</span>.prototype._new = <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span>
+	<span class="keyword">var</span> newObj;
+	<span class="keyword">var</span> resultObj; 
+	newObj = {}; 
+    newObj.__proto__ = <span class="keyword">this</span>.prototype;<span class="comment">//修改__proto__，指向构造函数的prototype</span>
+    resultObj = <span class="keyword">this</span>.apply(newObj, <span class="built_in">arguments</span>);
+    <span class="keyword">return</span> (<span class="keyword">typeof</span> resultObj === <span class="string">'object'</span> && resultObj) || newObj;
+}
+</pre></td></tr></table></figure>
+
+<p>这样就可以用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre><span class="keyword">var</span> newFunc = <span class="built_in">Function</span>._new();
+</pre></td></tr></table></figure><br>来实现一个function的定义了<br><br>在一个对象的<code>prototype</code>里面，还有一个<code>constructor</code>属性,指向构造函数本身，如果我们想通过原型做继承，把原型指向parent，这样会造成constructor不正确。<br><br>所以在利用<code>prototype</code>做继承的时候，一定要记得把<code>constructor</code>修改回来。<br>代码如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+</pre></td><td class="code"><pre>	<span class="function"><span class="keyword">function</span> <span class="title">Parent</span><span class="params">()</span>{</span>
+	}
+	<span class="function"><span class="keyword">function</span> <span class="title">Children</span><span class="params">()</span>{</span>
+	}
+	Children.prototype = Parent();
+	Children.prototype.constructor = Children;
+</pre></td></tr></table></figure><br>这种继承方式是最简单的，但是问题也是很多的。<br>在天镶博客里看到了Es5里新增了<code>Object.create</code>的方法，用于继承，其实就是封装了刚才的继承过程用法如下：<br><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="code"><pre>	<span class="function"><span class="keyword">function</span> <span class="title">Parent</span><span class="params">()</span>{</span>
+	}
+	<span class="function"><span class="keyword">function</span> <span class="title">Children</span><span class="params">()</span>{</span>
+	}
+	Children.create(Parent.prototype);
+	Children.prototype.constructor = Children;
+	
+	<span class="keyword">var</span> obj = <span class="keyword">new</span> Children();
+</pre></td></tr></table></figure>
+
+<p>这种继承的方法和之前的区别是，我们没有实例化Parent对象，而是直接把Parent.prototype拷贝到Children.prototype里了。当然这种继承方式有兼容性缺陷，但是只有父类的prototype上的属性被继承了，而且是继承自一个父类实例。</p>
+<h2 id="拷贝实现继承">拷贝实现继承</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre></td><td class="code"><pre>	 <span class="comment">/*定义一个人类*/</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name,age)</span>
+  {</span>
+      <span class="keyword">this</span>.name=name;
+      <span class="keyword">this</span>.age=age;
+   }
+   <span class="comment">/*定义一个学生类*/</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(name,age,grade)</span>
+  {</span>
+      Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);
+      <span class="keyword">this</span>.grade=grade;
+  }
+  <span class="comment">//创建一个学生类</span>
+  Student.prototype = Person.prototype;
+  <span class="keyword">var</span> student=<span class="keyword">new</span> Student(<span class="string">"qian"</span>,<span class="number">21</span>,<span class="string">"一年级"</span>);
+  <span class="comment">//测试</span>
+   console.log(<span class="string">"name:"</span>+student.name+<span class="string">"\n"</span>+<span class="string">"age:"</span>+student.age+<span class="string">"\n"</span>+<span class="string">"grade:"</span>+student.grade);
+   <span class="comment">//大家可以看到测试结果name:qian  age:21  grade:一年级</span>
+   <span class="comment">//学生类里面我没有给name和age属性赋值啊,为什么又存在这两个属性的值呢,这个就是apply的神奇之处.</span>
+</pre></td></tr></table></figure>
+
+<p>这里有个例子，定义一个person类和Student类，通过apply用当前Student的this替换掉了Persion类的this并执行,同时把arguments传过去。这样就可以把Person的属性都拷贝过来。从而实现属性继承。<br>把属性拷贝过来的继承，然后再通过原型共用就可以把原型上的方法继承过来了</p>
+<p>这样的继承的特点就是：</p>
+<p>-子类的属性会把父类覆盖，子类可以修改父类的属性，并且不会像之前直接用修改原型实现的继承导致修改父类属性会造成其他的对象同时被修改。</p>
+<p>-但是子类和父类共享prototype,这样就不能随意修改prototype上的东西，否则其他的对象也会受到影响。</p>
+<p>为了解决第二点的麻烦，所以要让子类和父类不共用原型。</p>
+<h2 id="浅拷贝不共用原型继承">浅拷贝不共用原型继承</h2>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre></td><td class="code"><pre>	 <span class="comment">/*定义一个人类*/</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name,age)</span>
+  {</span>
+      <span class="keyword">this</span>.name=name;
+      <span class="keyword">this</span>.age=age;
+   }
+   <span class="comment">/*定义一个学生类*/</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(name,age,grade)</span>
+  {</span>
+      Person.apply(<span class="keyword">this</span>,<span class="built_in">arguments</span>);
+      <span class="keyword">this</span>.grade=grade;
+  }
+   Student.prototype = <span class="keyword">new</span> Person();
+   Student.prototype.constructor = Student;
+  <span class="comment">//创建一个学生类</span>
+  <span class="keyword">var</span> student=<span class="keyword">new</span> Student(<span class="string">"qian"</span>,<span class="number">21</span>,<span class="string">"一年级"</span>);
+  <span class="comment">//测试</span>
+   console.log(<span class="string">"name:"</span>+student.name+<span class="string">"\n"</span>+<span class="string">"age:"</span>+student.age+<span class="string">"\n"</span>+<span class="string">"grade:"</span>+student.grade);
+</pre></td></tr></table></figure><br>这样虽然不共用原型了，但是会有很多个Parent用来继承，有点浪费了。</p>
+<p>所以我们还有一种简单粗暴的方法，就是直接把所有的属性和方法直接拷贝一遍</p>
+<p>代码如下：</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre>	 <span class="comment">/*定义一个人类*/</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name,age)</span>
+  {</span>
+      <span class="keyword">this</span>.name=name;
+      <span class="keyword">this</span>.age=age;
+   }
+   <span class="comment">/*定义一个学生类*/</span>
+  <span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(name,age,grade)</span>
+  {</span>
+       <span class="keyword">var</span> parentIst = <span class="keyword">new</span> Person();
+		    <span class="keyword">var</span> item;
+		    <span class="keyword">for</span>(item <span class="keyword">in</span> parentIst) {
+		        <span class="keyword">this</span>[item] = parentIst[item];
+		    }
+      <span class="keyword">this</span>.grade=grade;
+  }
+   
+  <span class="comment">//创建一个学生类</span>
+  <span class="keyword">var</span> student=<span class="keyword">new</span> Student(<span class="string">"qian"</span>,<span class="number">21</span>,<span class="string">"一年级"</span>);
+  <span class="comment">//测试</span>
+   console.log(<span class="string">"name:"</span>+student.name+<span class="string">"\n"</span>+<span class="string">"age:"</span>+student.age+<span class="string">"\n"</span>+<span class="string">"grade:"</span>+student.grade);
+</pre></td></tr></table></figure><br>这样就复制过来了。但是还是有问题。。//尼玛怎么这么多问题</p>
+<p>问题在哪里，这种拷贝属于所谓的“浅拷贝”，如果父类的属性是引用类型，最终实现的只不过是新增一个引用而已，这样在子类里进行修改引用类型会造成所有的属性发生改变。那怎么办呢？</p>
+<h3 id="深拷贝">深拷贝</h3>
+<p>深拷贝其实不难，就是繁琐了一点，递归使用浅拷贝</p>
+<p>实现的代码如下：</p>
+<p><figure class="highlight javascript"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre></td><td class="code"><pre>
+
+    <span class="function"><span class="keyword">function</span> <span class="title">deepCopy</span><span class="params">(p,c)</span>{</span>
+    	<span class="keyword">var</span> c = c || {};
+　　　　<span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> p) {
+　　　　　　<span class="keyword">if</span> (<span class="keyword">typeof</span> p[i] === <span class="string">'object'</span>) {
+　　　　　　　　c[i] = (p[i].constructor === <span class="built_in">Array</span>) ? [] : {};
+　　　　　　　　deepCopy(p[i], c[i]);
+　　　　　　} <span class="keyword">else</span> {
+　　　　　　　　　c[i] = p[i];
+　　　　　　}
+　　　　}
+	<span class="keyword">return</span> c;
+
+    }
+		 <span class="comment">/*定义一个人类*/</span>
+    <span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name,age)</span>
+    {</span>
+        <span class="keyword">this</span>.name=name;
+        <span class="keyword">this</span>.age=age;
+     }
+     <span class="comment">/*定义一个学生类*/</span>
+    <span class="function"><span class="keyword">function</span> <span class="title">Student</span><span class="params">(name,age,grade)</span>
+    {</span>
+         <span class="keyword">var</span> parentIst = <span class="keyword">new</span> Person();
+         
+	<span class="keyword">var</span> item = deepCopy(parentlst);
+		    <span class="keyword">for</span>(item <span class="keyword">in</span> parentIst) {
+		        <span class="keyword">this</span>[item] = parentIst[item];
+		    }
+        <span class="keyword">this</span>.grade=grade;
+    }
+     
+    <span class="comment">//创建一个学生类</span>
+    <span class="keyword">var</span> student=<span class="keyword">new</span> Student(<span class="string">"qian"</span>,<span class="number">21</span>,<span class="string">"一年级"</span>);
+    <span class="comment">//测试</span>
+     console.log(<span class="string">"name:"</span>+student.name+<span class="string">"\n"</span>+<span class="string">"age:"</span>+student.age+<span class="string">"\n"</span>+<span class="string">"grade:"</span>+student.grade);
+</pre></td></tr></table></figure><br>这样就直接实现了深拷贝</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
         <time datetime="2014-09-08T16:31:38.000Z"><a href="/2014/09/09/我在仙林这两年/">Sep 9 2014</a></time>
       
       
@@ -722,80 +1031,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <time datetime="2014-03-20T08:06:11.000Z"><a href="/2014/03/20/这几天关于移动web开发的总结/">Mar 20 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/03/20/这几天关于移动web开发的总结/">这几天关于移动web开发的总结</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>这几天一直在纠结要不要改版密议荚移动端，因为移动的流量太多了。</p>
-<p>做移动端web开发难免想去实现一些原生app的效果</p>
-<p>最简单的，下拉刷新，上拉刷新之类的，页面的切换。</p>
-<p>有一个常见的iscroll.js</p>
-<p>这个东西我以前在我的移动web课程表的应用里用到过。当时对它的概念不是很了解。这次想了解深入，希望能用它开发的更好。结果，lz就被坑了一个晚上。</p>
-<p>最后没加下拉刷新。这个功能后面补。</p>
-<p>主要是一些简单的模拟</p>
-<p>这是一个单页应用</p>
-<p><img class="alignnone" alt="" src="http://images.cnblogs.com/cnblogs_com/rubylouvre/495346/o_structure-1.png" width="193" height="271"></p>
-<p>图片来自<a href="http://www.html-js.com/blog/2328" target="_blank" rel="external">http://www.html-js.com/blog/2328</a></p>
-<p>我根据这个博客吸取了很多东西</p>
-<p>我的应用没有header和footer，只是2个view在不停的切换。。。其实完全可以直接就&lt;a&gt;超链接解决，我也不懂我干嘛要这么干。。。</p>
-<p><a href="http://www.miyijia.com" target="_blank" rel="external">http://www.miyijia.com</a></p>
-<p>大家用手机去看下吧。</p>
-<p><a href="http://www.iweile.cn/wp-content/uploads/2014/03/D6XTK2EEHKDD_X1QM1.jpg" target="_blank" rel="external"><img class="alignnone size-medium wp-image-180" alt="D6[X}TK2[EEHKDD_$`$X1QM" src="http://www.iweile.cn/wp-content/uploads/2014/03/D6XTK2EEHKDD_X1QM1-214x300.jpg" width="214" height="300"></a></p>
-<p>adsense无视，赚生活费的。</p>
-<p>很简单的单页应用，写了一整天（下午2点－晚上）</p>
-<p>view很简单。</p>
-<p>第一个要解决的问题：</p>
-<p>以前常用的是tp的模板输出，这次不干了。用的arttmeplate模板引擎，泥马真心好用，一个json和一个html模板就可以了。</p>
-<p>不用再$(‘.xxx’).append(‘&lt;a&gt;&lt;/a&gt;’);了。github地址：<a href="https://github.com/aui/artTemplate" target="_blank" rel="external">https://github.com/aui/artTemplate</a> 推荐使用，性能挺高。</p>
-<p>第二个问题：view之间切换，可以用hide和show，百度新闻移动页貌似是这么做的。但是我想做一个banner轮播式的切换，刚才的文章用css3解决了</p>
-<p>用animate貌似也可以。我开始是用animate的。</p>
-<p><img class="alignnone" alt="" src="http://images.cnblogs.com/cnblogs_com/rubylouvre/495346/o_structure-6.png" width="372" height="293"></p>
-<p><pre class="brush:css">&lt;style type=”text/css”&gt;<br>    .current.out {<br>        -webkit-transition: -webkit-transform 400ms;<br>        -webkit-transform: translate3d(-100%,0,0);<br>    }<br>    .next {<br>        display: block;<br>        -webkit-transform: translate3d(100%,0,0);<br>    }<br>    .next.in{<br>        -webkit-transition: -webkit-transform 400ms;<br>        -webkit-transform: translate3d(0,0,0);<br>    }<br>&lt;/style&gt;</pre><br>一个view作为current 一个就是next。current的view添加一个out伪类就可以out出去了，next加一个in就进来了。很好用。</p>
-<p>完成之后修改当前的view为current。另一个hide起来。</p>
-<p>。</p>
-<p>还想做一个随手指拖动的切换view的功能，下次再说吧。</p>
-<p>接下来是赞的功能的实现，因为图片会不断load进来，dom会不断增多，所以采用事件委托的方式解决点击事件。这里涉及到click和tap的处理。我暂时用的click替代的tap，虽然知道不好，但是先用着吧。</p>
-<p>关于事件委托，在前段乱炖社区看到的不错的文章，转给大家：<a href="http://www.html-js.com/article/1824" target="_blank" rel="external">http://www.html-js.com/article/1824</a></p>
-<p>最近太忙，先写一部分吧。</p>
-<p>后面的完善等过几天再做。猛啃《javascript高级程序设计》中。</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <ul class="page-direction" id="page-direction">
     <li><a class="page-prev icon-chevron-sign-left" href="javascript:;" title="Prev"></a></li>
@@ -833,6 +1068,10 @@
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2015/03/06/javascript继承简单理解/">javascript继承简单理解</a>
+      </li>
     
       <li>
         <a href="/2014/09/09/我在仙林这两年/">我在仙林这两年</a>
