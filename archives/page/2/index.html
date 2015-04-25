@@ -75,11 +75,57 @@
   <div class="post-content">
     <header>
       
+        <time datetime="2014-03-24T10:33:55.000Z"><a href="/2014/03/24/nginx 代理 proxy_pass设置/">Mar 24 2014</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2014/03/24/nginx 代理 proxy_pass设置/">nginx代理proxy_pass设置</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>今天在服务器上装了node和express</p>
+<p>用forever守护进程自启动</p>
+<p>express用的8080端口，然后用nginx反向代理把域名代理到了127.0.0.1:8080了。</p>
+<p>server<br>{<br>    listen 80;<br>    server_name node.miyijia.com;<br>    location / {<br>        proxy_pass <a href="http://127.0.0.1:8080" target="_blank" rel="external">http://127.0.0.1:8080</a>;<br>        proxy_redirect off;<br>        proxy_set_header X-Real-IP $remote_addr;<br>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>    }<br>}</p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+  
+    <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
         <time datetime="2014-03-21T12:24:57.000Z"><a href="/2014/03/21/[转]mac下adb安装方法/">Mar 21 2014</a></time>
       
       
   
-    <h1 class="title"><a href="/2014/03/21/[转]mac下adb安装方法/">［转mac下adb安装方法</a></h1>
+    <h1 class="title"><a href="/2014/03/21/[转]mac下adb安装方法/">[转]mac下adb安装方法</a></h1>
   
 
     </header>
@@ -301,6 +347,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2015/04/25/CSS的box-flex属性/">CSS的box-flex属性</a>
+      </li>
+    
+      <li>
         <a href="/2015/04/15/简单学习requirejs/">简单学习requirejs</a>
       </li>
     
@@ -341,11 +391,7 @@
       </li>
     
       <li>
-        <a href="/2014/03/21/[转]mac下adb安装方法/">［转mac下adb安装方法</a>
-      </li>
-    
-      <li>
-        <a href="/2014/03/20/这几天关于移动web开发的总结/">这几天关于移动web开发的总结</a>
+        <a href="/2014/03/21/[转]mac下adb安装方法/">[转]mac下adb安装方法</a>
       </li>
     
   </ul>

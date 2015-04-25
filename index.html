@@ -71,6 +71,149 @@
   <div class="post-content">
     <header>
       
+        <time datetime="2015-04-25T15:18:40.000Z"><a href="/2015/04/25/CSS的box-flex属性/">Apr 25 2015</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2015/04/25/CSS的box-flex属性/">CSS的box-flex属性</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <blockquote>
+<p>css的布局方式很多，常用布局可以完成大部分的需求，但是很麻烦，维护不方便。最近在看react-native，在react-native里有一个css-layout的工具，可以把css的flexbox布局编译成c或者java，这样flexbox就不止是用在dom布局上了。Flexbox布局（Flexible Box)模块旨在提供一个更加有效的方式制定、调整和分布一个容器里的项目布局，即使他们的大小是未知或者是动态的。</p>
+</blockquote>
+<p>flexbox希望容器内部的元素可以用最好的方式去排列，可以去适应各种分辨率和尺寸的屏幕。但是因为兼容性问题，所以一般用在了</p>
+<p>且不谈在各个平台上的flexbox是怎么实现的，先来说说flexbox的一些概念。</p>
+<h2 id="flexbox基础">flexbox基础</h2>
+<p>flexbox是整个一个模块，而不只是一个css属性。一个flexbox模块需要容器和子元素组成。</p>
+<p>我们来看w3c官方提供的对flexbox的解释的图片<br><img src="http://www.w3.org/TR/css-flexbox/images/flex-direction-terms.svg"></p>
+<p>每个flexbox都有一个主轴和侧轴，我们可以调整主轴方向选择不同排列方式。</p>
+<h2 id="属性">属性</h2>
+<h3 id="display">display</h3>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>display: flex | inline-flex;
+</pre></td></tr></table></figure><br>设置一个flexbox容器，这个容器可以是块元素，也可以是内联元素。但是因为涉及到兼容性问题，一般我们都会完整的写一个css<br><br><br><figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="tag">display</span>: <span class="tag">-webkit-box</span>;      <span class="comment">/* OLD - iOS 6-, Safari 3.1-6 */</span>
+<span class="tag">display</span>: <span class="tag">-moz-box</span>;         <span class="comment">/* OLD - Firefox 19- (buggy but mostly works) */</span>
+<span class="tag">display</span>: <span class="tag">-ms-flexbox</span>;      <span class="comment">/* TWEENER - IE 10 */</span>
+<span class="tag">display</span>: <span class="tag">-webkit-flex</span>;     <span class="comment">/* NEW - Chrome */</span>
+<span class="tag">display</span>: <span class="tag">flex</span>;             <span class="comment">/* NEW, Spec - Opera 12.1, Firefox 20+ */</span>
+</pre></td></tr></table></figure>
+
+<h3 id="flex-direction">flex-direction</h3>
+<p>在flexbox容器上我们可以设置flex主轴方向,属性 : flex-direction</p>
+<p>flex-direction属性可以有这几个值：<br>row：横向；<br>column：纵向;</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+2
+3
+4
+</pre></td><td class="code"><pre><span class="tag">-moz-flex-direction</span> :    <span class="tag">row</span>;
+<span class="tag">-ms--flex-direction</span>: <span class="tag">row</span>; 
+<span class="tag">-webkit-flex-direction</span>: <span class="tag">row</span>;
+<span class="tag">flex-direction</span>:         <span class="tag">row</span>;
+</pre></td></tr></table></figure>
+
+<h3 id="flex-wrap">flex-wrap</h3>
+<p>同样是设置在容器上的属性</p>
+<p>这个主要用来定义伸缩容器里是单行还是多行显示，侧轴的方向决定了新行堆放的方向。</p>
+<ul>
+<li>nowrap(默认值)：伸缩容器单行显示，“ltr”排版下，子元素从左到右排列；“rtl”排版上子元素从右向左排列。</li>
+<li>wrap：伸缩容器多行显示，“ltr”排版下，子元素从左到右排列；“rtl”排版上子元素从右向左排列。</li>
+<li>wrap-reverse：伸缩容器多行显示，“ltr”排版下，子元素从右向左排列；“rtl”排版下，子元素从左到右排列。（和wrap相反）</li>
+</ul>
+<h3 id="flex-flow">flex-flow</h3>
+<p>这个属性可以把上面2个属性合并起来写</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>flex-flow: &lt;‘flex-direction’&gt; || &lt;‘flex-wrap’&gt;
+</pre></td></tr></table></figure>
+
+
+<h3 id="justify-content">justify-content</h3>
+<p>设置在容器上用来定义子元素在容器内沿着主轴的对齐方式。</p>
+<ul>
+<li>flex-start(默认值)：子元素向一行的起始位置靠齐。</li>
+<li>flex-end：子元素向一行的结束位置靠齐。</li>
+<li>center：子元素向一行的中间位置靠齐。</li>
+<li>space-between：子元素会平均地分布在行里。第一个子元素一行中的最开始位置，最后一个子元素在一行中最终点位置。</li>
+<li>space-around：子元素会平均地分布在行里，两端保留一半的空间。</li>
+</ul>
+<h3 id="align-item">align-item</h3>
+<p>使用在在父元素上，就是一个侧轴上的justify-content属性，但是值略不一样。</p>
+<ul>
+<li>flex-start：子元素在侧轴起点边的外边距紧靠住该行在侧轴起始的边。</li>
+<li>flex-end：子元素在侧轴终点边的外边距靠住该行在侧轴终点的边 。</li>
+<li>center：子元素的外边距盒在该行的侧轴上居中放置。</li>
+<li>baseline：子元素根据他们的基线对齐。</li>
+<li>stretch（默认值）：子元素拉伸填充整个伸缩容器。此值会使项目的外边距盒的尺寸在遵照「min/max-width/height」属性的限制下尽可能接近所在行的尺寸。</li>
+</ul>
+<h3 id="align-content">align-content</h3>
+<p>这个属性也是在父元素上，在有多行子元素的情况下，对行的对齐方式做安排</p>
+<ul>
+<li>flex-start：各行向伸缩容器的起点位置堆叠。</li>
+<li>flex-end：各行向伸缩容器的结束位置堆叠。</li>
+<li>center：各行向伸缩容器的中间位置堆叠。</li>
+<li>space-between：各行在伸缩容器中平均分布。</li>
+<li>space-around：各行在伸缩容器中平均分布，在两边各有一半的空间。</li>
+<li>stretch（默认值）：各行将会伸展以占用剩余的空间。</li>
+</ul>
+<h2 id="flex-item的css属性">flex-item的css属性</h2>
+<h3 id="order">order</h3>
+<p>设置一个值，安排排列顺序</p>
+<h3 id="flex">flex</h3>
+<p>flex可以设置3个值</p>
+<p>“flex-grow”、“flex-shrink”和“flex-basis”</p>
+<p>flex-grow:是一个不带单位的比例主要用来定义flex-item的伸缩比例。</p>
+<p>flex-shrink:根据需要用来定义flex-item收缩的能力。缺省是1</p>
+<p>flex-basis:这个用来设置伸缩基准值，剩余的空间按比率进行伸缩。默认:auto;</p>
+<h3 id="align-self">align-self</h3>
+<p>子元素的对齐方式，可以覆盖父元素的值</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre>1
+</pre></td><td class="code"><pre>align-self: auto | flex-start | flex-end | center | baseline | stretch
+</pre></td></tr></table></figure>
+
+
+
+
+
+
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+    <div class="gallery">
+  <div class="photoset">
+    
+      <img src="">
+    
+  </div>
+  <div class="control">
+    <div class="prev"></div>
+    <div class="next"></div>
+  </div>
+</div>
+  
+  <div class="post-content">
+    <header>
+      
         <time datetime="2015-04-15T12:47:05.000Z"><a href="/2015/04/15/简单学习requirejs/">Apr 15 2015</a></time>
       
       
@@ -1053,52 +1196,6 @@
 
 
 
-  <article class="post">
-  
-    <div class="gallery">
-  <div class="photoset">
-    
-      <img src="">
-    
-  </div>
-  <div class="control">
-    <div class="prev"></div>
-    <div class="next"></div>
-  </div>
-</div>
-  
-  <div class="post-content">
-    <header>
-      
-        <time datetime="2014-03-24T10:33:55.000Z"><a href="/2014/03/24/nginx 代理 proxy_pass设置/">Mar 24 2014</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2014/03/24/nginx 代理 proxy_pass设置/">nginx代理proxy_pass设置</a></h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>今天在服务器上装了node和express</p>
-<p>用forever守护进程自启动</p>
-<p>express用的8080端口，然后用nginx反向代理把域名代理到了127.0.0.1:8080了。</p>
-<p>server<br>{<br>    listen 80;<br>    server_name node.miyijia.com;<br>    location / {<br>        proxy_pass <a href="http://127.0.0.1:8080" target="_blank" rel="external">http://127.0.0.1:8080</a>;<br>        proxy_redirect off;<br>        proxy_set_header X-Real-IP $remote_addr;<br>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>    }<br>}</p>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
 
 <ul class="page-direction" id="page-direction">
     <li><a class="page-prev icon-chevron-sign-left" href="javascript:;" title="Prev"></a></li>
@@ -1136,6 +1233,10 @@
 <div class="widget tag">
   <h3 class="title">Recent Posts</h3>
   <ul class="entry">
+    
+      <li>
+        <a href="/2015/04/25/CSS的box-flex属性/">CSS的box-flex属性</a>
+      </li>
     
       <li>
         <a href="/2015/04/15/简单学习requirejs/">简单学习requirejs</a>
@@ -1178,11 +1279,7 @@
       </li>
     
       <li>
-        <a href="/2014/03/21/[转]mac下adb安装方法/">［转mac下adb安装方法</a>
-      </li>
-    
-      <li>
-        <a href="/2014/03/20/这几天关于移动web开发的总结/">这几天关于移动web开发的总结</a>
+        <a href="/2014/03/21/[转]mac下adb安装方法/">[转]mac下adb安装方法</a>
       </li>
     
   </ul>
