@@ -8,8 +8,7 @@
   
   <meta name="description" content="原文：http://ihower.tw/blog/archives/5140
 因为最近的这个网站学长从svn改成了git了，并且他推荐按git flow来开发。
-转过来存一下
-大家都知道 Git 開 branch 很方便，非常鼓勵 topic branch，但有沒有一套模型流程告訴我們應該怎麼管理 ">
+转过来存一下">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -87,7 +86,7 @@
       
         <p>原文：<a href="http://ihower.tw/blog/archives/5140" target="_blank" rel="external">http://ihower.tw/blog/archives/5140</a></p>
 <p>因为最近的这个网站学长从svn改成了git了，并且他推荐按git flow来开发。</p>
-<p>转过来存一下</p>
+<p>转过来存一下<br><a id="more"></a></p>
 <p>大家都知道 Git 開 branch 很方便，非常鼓勵 topic branch，但有沒有一套模型流程告訴我們應該怎麼管理 branch 呢? 有人便整理出一套最佳實踐慣例 A successful Git branching model，我們團隊就採用了這套流程。簡單來說，他將 branch 分成兩個主要分支，三種支援性分支：</p>
 <p><img src="http://ihower.tw/blog/wp-content/uploads/2011/02/Screen-shot-2009-12-24-at-11.32.03.png" alt=""></p>
 <p>主要分支<br>master: 永遠處在 production-ready 狀態<br>develop: 最新的下次發佈開發狀態<br>支援性分支<br>Feature branches: 開發新功能都從 develop 分支出來，完成後 merge 回 develop<br>Release branches: 準備要 release 的版本，只修 bugs。從 develop 分支出來，完成後 merge 回 master 和 develop<br>Hotfix branches: 等不及 release 版本就必須馬上修 master 趕上線的情況。會從 master 分支出來，完成後 merge 回 master 和 develop<br>作者還提供了 git-flow 指令工具幫助我們很容易的實踐，用法如下:</p>

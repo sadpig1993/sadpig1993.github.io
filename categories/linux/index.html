@@ -85,27 +85,15 @@
     </header>
     <div class="entry">
       
-        <p>CentOS本身是不支持NTFS的格式的，为了让CentOS能够支持Windows的NTFS。利用ntfs－3g使其支持NTFS的挂载。</p>
-<p>步骤如下：</p>
-<p>一、安装ntfs－3g</p>
-<p>1、从官网<a href="http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs－3g" target="_blank" rel="external">http://www.tuxera.com/community/ntfs-3g-download/下载稳定版ntfs－3g</a></p>
-<p>2、解压tar.gz包。在目录中运行命令窗。</p>
-<div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>./configure</li><br>    <li>make</li><br>    <li>make install</li><br></ol><br></div><br>或者直接都在命令窗中操作<br><br><br><br><br><div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>wget <a href="http://tuxera.com/opensource/ntfs-3g_ntfsprogs-2011.4.12.tgz" target="_blank" rel="external">http://tuxera.com/opensource/ntfs-3g_ntfsprogs-2011.4.12.tgz</a></li><br>    <li>tar zxvf ntfs-3g-2010.8.8.tgz</li><br>    <li>cd ntfs-3g-2010.8.8</li><br>    <li>./configure</li><br>    <li>make</li><br>    <li>make install</li><br></ol><br></div><br><strong>*</strong>在configure的时候可能会跳出 no acceptable C compiler in $PATH<strong><strong><br><br><br><br>这是由于没有安装gcc这个c编译器，安装方法 # yum -y install gcc<br><br>重新上面configure后的步骤<br><br>*</strong></strong>解决<em>*</em><br><br>一、挂载NTFS硬盘<br><br>这里以windows中的C盘( /dev/sda1)为例。<br><br>1、创建挂载点，建议放在/mnt/windows下<br><div><br><div><b><br></b><br><div></div><br></div><br><ol start="1"><br>    <li>mkdir /mnt/windows</li><br>    <li>mkdir /mnt/windows/c</li><br></ol><br></div>
-
-
-<p>2、挂载C盘</p>
-<div><br><div><b> </b></div><br><ol start="1"><br>    <li>mount -t ntfs-3g /dev/sda1 /mnt/windows/winC</li><br>    <li>mount -t ntfs-3g /dev/sda5 /mnt/windows/winD</li><br>    <li>mount -t ntfs-3g /dev/sda6 /mnt/windows/winE</li><br>    <li>mount -t ntfs-3g /dev/sda7 /mnt/windows/winF</li><br>    <li>mount -t ntfs-3g /dev/sdb1 /mnt/windows/MobileHard</li><br></ol><br></div>
-
-
-<p>至此，就可以查看并编辑/mnt/window/中Windows中NTFS盘的内容</p>
-<p>参考资料：</p>
-<p>1、<a href="http://www.ha97.com/2832.html" target="_blank" rel="external">http://www.ha97.com/2832.html</a></p>
-<p>2、<a href="http://blog.sina.com.cn/s/blog_4d834cf30100bxv9.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_4d834cf30100bxv9.html</a></p>
-
+        <p>CentOS本身是不支持NTFS的格式的，为了让CentOS能够支持Windows的NTFS。利用ntfs－3g使其支持NTFS的挂载。<br>
       
     </div>
     <footer>
       
+        
+          <div class="alignleft">
+            <a href="/2014/04/25/CentOS挂载NTFS硬盘/#more" class="more-link">Read More</a>
+          </div>
         
         
       

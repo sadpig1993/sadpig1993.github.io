@@ -7,7 +7,8 @@
   <meta name="author" content="Sadpig">
   
   <meta name="description" content="前天某个群里的人问了一句：我怎么没感觉到用了require.js的好处，反而比平时更麻烦了，他想知道为啥要用requirejs。我想，因为他可能一直在一个人写代码吧。
-模块化在其他开发过程中几乎是非常寻常的事儿，倒是到了前端开发的时候就变得特殊了，初学的时候几乎不管这些东西，但是随着页面的交互逻辑越">
+模块化在其他开发过程中几乎是非常寻常的事儿，倒是到了前端开发的时候就变得特殊了，初学的时候几乎不管这些东西，但是随着页面的交互逻辑越来越复杂，JS文件之间依赖关系越来越多，开发者慢慢变多，模块化肯定是最成熟的解决方案。
+模块化必然需要规范，常见的规范有AMD CMD CommonJS，nodejs采用了CommonJS的规范，requirejs为了解决浏览器端的模块化开发，慢慢产出了AMD规范。后来玉伯大大在使用requirejs的过程中意识到了AMD在开发过程中的一些问题，自己开发了seajs，慢慢产出CMD规范。">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -85,7 +86,7 @@
       
         <p>前天某个群里的人问了一句：我怎么没感觉到用了require.js的好处，反而比平时更麻烦了，他想知道为啥要用requirejs。我想，因为他可能一直在一个人写代码吧。</p>
 <p>模块化在其他开发过程中几乎是非常寻常的事儿，倒是到了前端开发的时候就变得特殊了，初学的时候几乎不管这些东西，但是随着页面的交互逻辑越来越复杂，JS文件之间依赖关系越来越多，开发者慢慢变多，模块化肯定是最成熟的解决方案。</p>
-<p>模块化必然需要规范，常见的规范有AMD CMD CommonJS，nodejs采用了CommonJS的规范，requirejs为了解决浏览器端的模块化开发，慢慢产出了AMD规范。后来玉伯大大在使用requirejs的过程中意识到了AMD在开发过程中的一些问题，自己开发了seajs，慢慢产出CMD规范。</p>
+<p>模块化必然需要规范，常见的规范有AMD CMD CommonJS，nodejs采用了CommonJS的规范，requirejs为了解决浏览器端的模块化开发，慢慢产出了AMD规范。后来玉伯大大在使用requirejs的过程中意识到了AMD在开发过程中的一些问题，自己开发了seajs，慢慢产出CMD规范。<br><a id="more"></a></p>
 <h2 id="异步模块定义(AMD)">异步模块定义(AMD)</h2>
 <p>异步模块定义是一种对模块的定义，使模块和它的依赖可以被异步的加载，但又按照正确的顺序。</p>
 <h3 id="开始">开始</h3>
